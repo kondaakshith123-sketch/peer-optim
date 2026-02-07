@@ -155,4 +155,78 @@ router.get('/', auth, async (req, res) => {
     }
 });
 
+// @route   GET api/match/free-now
+// @desc    Get count and list of peers free right now
+// @access  Private
+router.get('/free-now', auth, async (req, res) => {
+    try {
+        const day = req.query.day || 'MON'; // Default to MON
+
+        // 1. Get Current Time
+        const now = new Date();
+        const currentHours = now.getHours();
+        const currentMinutes = now.getMinutes();
+        const currentTotalMinutes = currentHours * 60 + currentMinutes;
+
+        // 2. Fetch all unique batch/subBatch combinations that are BUSY right now
+        // Find timetables for today where current time falls within start/end
+        const busySlots = await Timetable.find({ day });
+
+        const busySubBatches = new Set();
+
+        busySlots.forEach(slot => {
+            const start = toMinutes(slot.startTime);
+            const end = toMinutes(slot.endTime);
+
+            if (currentTotalMinutes >= start && currentTotalMinutes < end) {
+                // This slot is currently active
+                busySubBatches.add(`${slot.batch}-${slot.subBatch}`);
+            }
+        });
+
+        // 3. Find all users whose batch/subBatch is NOT in the busy list
+        // We need all profiles first. Optimization: Filter in DB if possible, but 
+        // constructing "NOT IN (batch, subBatch)" query for multiple pairs is complex.
+        // Easier to fetch relevant fields of all profiles and filter in JS for this scale.
+        const allProfiles = await Profile.find().populate('userId', ['name', 'email']);
+
+        const freePeers = [];
+
+        // Exclude current user
+        const currentUserId = req.user.id;
+
+        for (const profile of allProfiles) {
+            // Skip current user
+            if (profile.userId._id.toString() === currentUserId) continue;
+
+            const key = `${profile.batch}-${profile.subBatch}`;
+
+            // If their batch/subBatch is NOT in the busy set, they are free!
+            if (!busySubBatches.has(key)) {
+
+                // Also check if it's within college hours (9-5)
+                // If it's outside college hours, technically everyone is "free" or "away"
+                // Let's assume we only count them if it's 9-5
+                if (currentTotalMinutes >= COLLEGE_START && currentTotalMinutes < COLLEGE_END) {
+                    freePeers.push({
+                        name: profile.userId.name,
+                        batch: profile.batch,
+                        subBatch: profile.subBatch
+                    });
+                }
+            }
+        }
+
+        // Return count and first 5 peers
+        res.json({
+            count: freePeers.length,
+            peers: freePeers.slice(0, 5) // Limit for UI
+        });
+
+    } catch (err) {
+        console.error(err.message);
+        res.status(500).send('Server Error');
+    }
+});
+
 module.exports = router;
