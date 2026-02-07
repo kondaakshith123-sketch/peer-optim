@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Registration - Peer Optimiser</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+
+<body class="bg-slate-50 min-h-screen flex flex-col items-center justify-center p-4">
+
+    <div class="w-full max-w-lg card overflow-hidden my-8">
+        <!-- Header -->
+        <div class="bg-gradient-to-r from-indigo-600 to-purple-600 p-8 text-center text-white -mx-6 -mt-6 mb-6">
+            <h2 class="text-3xl font-bold mb-2">Create Account</h2>
+            <p class="opacity-90">Join the Peer Optimiser</p>
+        </div>
+
+        <!-- Form -->
+        <div class="">
+            <form id="registerForm" action="student_login.html" class="space-y-5">
+
+                <!-- Name -->
+                <div>
+                    <label for="reg_name" class="form-label">Student Name <span class="text-red-500">*</span></label>
+                    <input type="text" id="reg_name" name="reg_name" class="form-input pb-2 pt-2" required>
+                </div>
+
+                <div>
+                    <label for="reg_email" class="form-label">Student Email Address
+                        <span class="text-red-500">*</span></label>
+                    <input type="email" id="reg_email" name="reg_email" class="form-input pb-2 pt-2" required>
+                    <p id="email_error" class="text-red-500 text-xs mt-1 hidden"></p>
+                </div>
+
+                <div class="bg-indigo-50 border border-indigo-100 p-3 rounded-lg flex items-start space-x-2">
+                    <svg class="h-5 w-5 text-indigo-500 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                    <p class="text-xs text-indigo-700">Your Batch, Department, and Year will be automatically identified
+                        from your college email.</p>
+                </div>
+
+                <!-- Multiple Interests -->
+                <div>
+                    <label class="form-label mb-2">Interests <span class="text-red-500">*</span></label>
+                    <div class="grid grid-cols-2 gap-3">
+                        <label
+                            class="flex items-center space-x-2 p-3 border border-slate-200 rounded-lg cursor-pointer hover:bg-slate-50 transition-colors">
+                            <input type="checkbox" name="interest" value="CP"
+                                class="w-4 h-4 text-indigo-600 rounded focus:ring-indigo-500">
+                            <span class="text-sm text-slate-700">CP (Competitive Programming)</span>
+                        </label>
+                        <label
+                            class="flex items-center space-x-2 p-3 border border-slate-200 rounded-lg cursor-pointer hover:bg-slate-50 transition-colors">
+                            <input type="checkbox" name="interest" value="DSA"
+                                class="w-4 h-4 text-indigo-600 rounded focus:ring-indigo-500">
+                            <span class="text-sm text-slate-700">DSA (Data Structures)</span>
+                        </label>
+                        <label
+                            class="flex items-center space-x-2 p-3 border border-slate-200 rounded-lg cursor-pointer hover:bg-slate-50 transition-colors">
+                            <input type="checkbox" name="interest" value="WebD"
+                                class="w-4 h-4 text-indigo-600 rounded focus:ring-indigo-500">
+                            <span class="text-sm text-slate-700">Web Development</span>
+                        </label>
+                        <label
+                            class="flex items-center space-x-2 p-3 border border-slate-200 rounded-lg cursor-pointer hover:bg-slate-50 transition-colors">
+                            <input type="checkbox" name="interest" value="AppD"
+                                class="w-4 h-4 text-indigo-600 rounded focus:ring-indigo-500">
+                            <span class="text-sm text-slate-700">App Development</span>
+                        </label>
+                        <label
+                            class="flex items-center space-x-2 p-3 border border-slate-200 rounded-lg cursor-pointer hover:bg-slate-50 transition-colors">
+                            <input type="checkbox" name="interest" value="Others" onchange="toggleOtherInterest(this)"
+                                class="w-4 h-4 text-indigo-600 rounded focus:ring-indigo-500">
+                            <span class="text-sm text-slate-700">Others</span>
+                        </label>
+                    </div>
+                    <div id="other_interest_div" class="hidden mt-3">
+                        <input type="text" id="other_interest" placeholder="Specify other interest"
+                            class="form-input pb-2 pt-2">
+                    </div>
+
+                    <div>
+                        <label for="reg_password" class="form-label">Set Password <span
+                                class="text-red-500">*</span></label>
+                        <input type="password" id="reg_password" name="reg_password" class="form-input pb-2 pt-2"
+                            required>
+                    </div>
+
+                    <div>
+                        <label for="reg_confirm_password" class="form-label">Confirm Password <span
+                                class="text-red-500">*</span></label>
+                        <input type="password" id="reg_confirm_password" name="reg_confirm_password"
+                            class="form-input pb-2 pt-2" required>
+                        <p id="password_error" class="text-red-500 text-xs mt-1 hidden"></p>
+                    </div>
+
+                    <div class="pt-4">
+                        <button type="submit"
+                            class="w-full bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 text-white font-bold py-3 px-4 rounded-xl shadow-lg transition-all duration-200 transform hover:-translate-y-0.5">
+                            Register
+                        </button>
+                    </div>
+            </form>
+
+            <div class="mt-6 text-center text-sm text-slate-600">
+                Already registered?
+                <a href="student_login.html" class="text-indigo-600 font-semibold hover:underline ml-1">Login here</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript for Conditional Dropdown -->
+    <script src="js/register.js"></script>
+</body>
+
+</html>
