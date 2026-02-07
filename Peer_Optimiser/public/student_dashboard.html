@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard | PeerSync</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+
+<body class="bg-gray-50 min-h-screen">
+
+    <!-- Navbar -->
+    <nav class="bg-white border-b border-gray-100 sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <!-- Logo -->
+                <div class="flex items-center">
+                    <div class="flex-shrink-0 flex items-center gap-2">
+                        <div id="user-avatar-display"
+                            class="w-8 h-8 rounded-lg bg-indigo-600 text-white flex items-center justify-center font-bold text-lg shadow-sm">
+                            P
+                        </div>
+                        <span id="user-name-display"
+                            class="font-bold text-xl text-slate-800 tracking-tight">PeerSync</span>
+                    </div>
+                </div>
+
+                <script src="js/dashboard.js"></script>
+
+                <!-- Navigation Links -->
+                <div class="hidden md:flex items-center space-x-1">
+                    <a href="student_dashboard.html" class="nav-link nav-link-active">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24"
+                            stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+                        </svg>
+                        Home
+                    </a>
+                    <a href="idle_peers.html" class="nav-link nav-link-inactive">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24"
+                            stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+                        </svg>
+                        Idle Peers
+                    </a>
+                    <a href="student_profile.html" class="nav-link nav-link-inactive">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24"
+                            stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                        </svg>
+                        Profile
+                    </a>
+                </div>
+
+                <!-- Mobile menu button -->
+                <div class="flex items-center md:hidden">
+                    <button type="button"
+                        class="p-2 rounded-md text-slate-400 hover:text-slate-500 hover:bg-slate-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500">
+                        <span class="sr-only">Open main menu</span>
+                        <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                            stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M4 6h16M4 12h16M4 18h16" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+
+        <h1 class="text-3xl font-bold text-slate-900 mb-8">Dashboard</h1>
+
+        <!-- Top Overview Section -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
+            <!-- Current Free Slot Card -->
+            <div
+                class="bg-gradient-to-r from-indigo-600 to-purple-600 rounded-2xl p-6 text-white shadow-lg relative overflow-hidden">
+                <!-- Decorative circles -->
+                <div class="absolute top-0 right-0 -mr-4 -mt-4 w-24 h-24 rounded-full bg-white opacity-10 blur-xl">
+                </div>
+                <div class="absolute bottom-0 left-0 -ml-4 -mb-4 w-20 h-20 rounded-full bg-white opacity-10 blur-xl">
+                </div>
+
+                <div class="relative z-10">
+                    <div class="flex items-center gap-3 mb-4 opacity-90">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
+                            stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+                        <span id="current-status-label" class="text-sm font-medium tracking-wide">Current Status</span>
+                    </div>
+                    <div id="current-status-display" class="text-3xl md:text-4xl font-bold mb-6">
+                        Loading...
+                    </div>
+                    <div id="current-status-bubbles" class="flex gap-2 text-xs font-semibold">
+                        <!-- Bubbles will be injected here -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- Peers Free Now Card -->
+            <div class="card flex flex-col justify-between">
+                <div class="flex justify-between items-start">
+                    <div>
+                        <div class="text-slate-500 text-sm font-medium mb-1">Peers Free Now</div>
+                        <div id="peers-free-count" class="text-4xl font-bold text-slate-800">--</div>
+                    </div>
+                    <div class="p-3 bg-teal-50 rounded-xl text-teal-600">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
+                            stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+                        </svg>
+                    </div>
+                </div>
+
+                <div id="peers-free-avatars" class="flex -space-x-3 mt-6">
+                    <!-- Avatars will be injected here -->
+                </div>
+            </div>
+        </div>
+
+        <!-- Middle Section: Schedule & Activities -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
+
+            <!-- Today's Schedule -->
+            <div class="card h-full">
+                <div class="flex items-center gap-2 mb-6">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-indigo-500" fill="none"
+                        viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                    </svg>
+                    <h2 class="text-lg font-bold text-slate-800">Today's Schedule</h2>
+                </div>
+
+                <div id="schedule-list-container" class="space-y-4">
+                    <!-- Schedule Item 1 -->
+                    <div class="schedule-item group">
+                        <div class="schedule-icon-wrapper bg-indigo-50 text-indigo-600">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24"
+                                stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+                            </svg>
+                        </div>
+                        <div class="flex-1">
+                            <h3 class="font-semibold text-slate-800 text-sm">Data Structures</h3>
+                            <p class="text-xs text-slate-500">9:00 AM - 10:00 AM</p>
+                        </div>
+                    </div>
+
+                    <!-- Schedule Item 2: FREE -->
+                    <div class="flex items-center p-3 bg-emerald-50/50 rounded-xl border border-emerald-100/50">
+                        <div
+                            class="w-10 h-10 rounded-lg bg-emerald-100 text-emerald-600 flex items-center justify-center mr-4">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24"
+                                stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M17 14v6m-3-3h6M6 10h2a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v2a2 2 0 002 2zm10 0h2a2 2 0 002-2V6a2 2 0 00-2-2h-2a2 2 0 00-2 2v2a2 2 0 002 2zM6 20h2a2 2 0 002-2v-2a2 2 0 00-2-2H6a2 2 0 00-2 2v2a2 2 0 002 2z" />
+                            </svg>
+                        </div>
+                        <div class="flex-1">
+                            <h3 class="font-semibold text-slate-800 text-sm">Free Slot</h3>
+                            <p class="text-xs text-slate-500">10:00 AM - 11:00 AM</p>
+                        </div>
+                        <span
+                            class="bg-emerald-100 text-emerald-700 text-[10px] font-bold px-2 py-1 rounded uppercase tracking-wider">Free</span>
+                    </div>
+
+                    <!-- Schedule Item 3 -->
+                    <div class="schedule-item group">
+                        <div class="schedule-icon-wrapper bg-amber-50 text-amber-600">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24"
+                                stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M19.428 15.428a2 2 0 00-1.022-.547l-2.384-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z" />
+                            </svg>
+                        </div>
+                        <div class="flex-1">
+                            <h3 class="font-semibold text-slate-800 text-sm">Operating Systems Lab</h3>
+                            <p class="text-xs text-slate-500">11:00 AM - 1:00 PM</p>
+                        </div>
+                    </div>
+
+                    <!-- Schedule Item 4: FREE -->
+                    <div class="flex items-center p-3 bg-emerald-50/50 rounded-xl border border-emerald-100/50">
+                        <div
+                            class="w-10 h-10 rounded-lg bg-emerald-100 text-emerald-600 flex items-center justify-center mr-4">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24"
+                                stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M17 14v6m-3-3h6M6 10h2a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v2a2 2 0 002 2zm10 0h2a2 2 0 002-2V6a2 2 0 00-2-2h-2a2 2 0 00-2 2v2a2 2 0 002 2zM6 20h2a2 2 0 002-2v-2a2 2 0 00-2-2H6a2 2 0 00-2 2v2a2 2 0 002 2z" />
+                            </svg>
+                        </div>
+                        <div class="flex-1">
+                            <h3 class="font-semibold text-slate-800 text-sm">Lunch Break</h3>
+                            <p class="text-xs text-slate-500">1:00 PM - 2:00 PM</p>
+                        </div>
+                        <span
+                            class="bg-emerald-100 text-emerald-700 text-[10px] font-bold px-2 py-1 rounded uppercase tracking-wider">Free</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Interested Group Activities -->
+            <div class="card h-full">
+                <div class="flex items-center gap-2 mb-6">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-indigo-500" fill="none"
+                        viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+                    </svg>
+                    <h2 class="text-lg font-bold text-slate-800">Interested Group Activities</h2>
+                </div>
+
+                <div class="space-y-4">
+                    <!-- Activity 1 -->
+                    <div class="p-4 border border-slate-100 rounded-xl hover:shadow-md transition-shadow">
+                        <div class="flex justify-between items-start mb-2">
+                            <h3 class="font-semibold text-slate-800 text-sm">Codeforces Div 2 Contest Prep</h3>
+                            <div class="text-xs text-slate-400 font-medium flex items-center gap-1">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3" fill="none" viewBox="0 0 24 24"
+                                    stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                </svg>
+                                2:00 PM
+                            </div>
+                        </div>
+                        <div class="flex justify-between items-end">
+                            <div class="flex items-center gap-2">
+                                <span
+                                    class="bg-indigo-50 text-indigo-700 text-[10px] font-bold px-2 py-0.5 rounded">CP</span>
+                                <span class="text-xs text-slate-500">5/8 joined</span>
+                            </div>
+                            <button
+                                class="px-4 py-1.5 text-xs font-semibold text-indigo-600 border border-indigo-200 rounded-lg hover:bg-indigo-50 transition-colors">
+                                Join
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Activity 2 -->
+                    <div class="p-4 border border-slate-100 rounded-xl hover:shadow-md transition-shadow">
+                        <div class="flex justify-between items-start mb-2">
+                            <h3 class="font-semibold text-slate-800 text-sm">LeetCode Daily Challenge</h3>
+                            <div class="text-xs text-slate-400 font-medium flex items-center gap-1">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3" fill="none" viewBox="0 0 24 24"
+                                    stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                </svg>
+                                3:00 PM
+                            </div>
+                        </div>
+                        <div class="flex justify-between items-end">
+                            <div class="flex items-center gap-2">
+                                <span
+                                    class="bg-indigo-50 text-indigo-700 text-[10px] font-bold px-2 py-0.5 rounded">DSA</span>
+                                <span class="text-xs text-slate-500">12/20 joined</span>
+                            </div>
+                            <button
+                                class="px-4 py-1.5 text-xs font-semibold text-indigo-600 border border-indigo-200 rounded-lg hover:bg-indigo-50 transition-colors">
+                                Join
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Activity 3 -->
+                    <div class="p-4 border border-slate-100 rounded-xl hover:shadow-md transition-shadow">
+                        <div class="flex justify-between items-start mb-2">
+                            <h3 class="font-semibold text-slate-800 text-sm">React Project Sprint</h3>
+                            <div class="text-xs text-slate-400 font-medium flex items-center gap-1">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3" fill="none" viewBox="0 0 24 24"
+                                    stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                </svg>
+                                4:00 PM
+                            </div>
+                        </div>
+                        <div class="flex justify-between items-end">
+                            <div class="flex items-center gap-2">
+                                <span class="bg-indigo-50 text-indigo-700 text-[10px] font-bold px-2 py-0.5 rounded">Web
+                                    Dev</span>
+                                <span
+                                    class="bg-indigo-50 text-indigo-700 text-[10px] font-bold px-2 py-0.5 rounded">React</span>
+                                <span class="text-xs text-slate-500">3/5 joined</span>
+                            </div>
+                            <button
+                                class="px-4 py-1.5 text-xs font-semibold text-indigo-600 border border-indigo-200 rounded-lg hover:bg-indigo-50 transition-colors">
+                                Join
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Activity 4 -->
+                    <div class="p-4 border border-slate-100 rounded-xl hover:shadow-md transition-shadow">
+                        <div class="flex justify-between items-start mb-2">
+                            <h3 class="font-semibold text-slate-800 text-sm">ML Paper Reading Club</h3>
+                            <div class="text-xs text-slate-400 font-medium flex items-center gap-1">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3" fill="none" viewBox="0 0 24 24"
+                                    stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                </svg>
+                                5:00 PM
+                            </div>
+                        </div>
+                        <div class="flex justify-between items-end">
+                            <div class="flex items-center gap-2">
+                                <span
+                                    class="bg-indigo-50 text-indigo-700 text-[10px] font-bold px-2 py-0.5 rounded">AIML</span>
+                                <span class="text-xs text-slate-500">7/10 joined</span>
+                            </div>
+                            <button
+                                class="px-4 py-1.5 text-xs font-semibold text-indigo-600 border border-indigo-200 rounded-lg hover:bg-indigo-50 transition-colors">
+                                Join
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Suggested For You (Horizontal Scroll or Grid) -->
+        <div class="mb-8">
+            <div class="flex items-center gap-2 mb-4">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-amber-500" fill="none" viewBox="0 0 24 24"
+                    stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" />
+                </svg>
+                <h2 class="text-lg font-bold text-slate-800">Suggested For You</h2>
+            </div>
+
+
+            <div id="suggested-peers-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+
+                <!-- Suggestion 1 -->
+                <div
+                    class="bg-white rounded-xl p-5 border border-slate-100 shadow-sm hover:shadow-md transition-shadow group cursor-pointer">
+                    <div class="flex justify-between items-start mb-2">
+                        <div class="flex items-center gap-2">
+                            <h3 class="font-bold text-slate-800 text-sm">DSA Mock Interview</h3>
+                            <span class="bg-gray-100 text-gray-600 text-[10px] font-bold px-2 py-0.5 rounded">DSA</span>
+                        </div>
+                        <svg xmlns="http://www.w3.org/2000/svg"
+                            class="h-4 w-4 text-slate-300 group-hover:text-indigo-500 transition-colors" fill="none"
+                            viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                        </svg>
+                    </div>
+                    <p class="text-xs text-slate-500 mb-3">Practice with a peer for upcoming placements</p>
+                    <div class="text-xs text-indigo-600 font-medium">3 peers interested</div>
+                </div>
+
+                <!-- Suggestion 2 -->
+                <div
+                    class="bg-white rounded-xl p-5 border border-slate-100 shadow-sm hover:shadow-md transition-shadow group cursor-pointer">
+                    <div class="flex justify-between items-start mb-2">
+                        <div class="flex items-center gap-2">
+                            <h3 class="font-bold text-slate-800 text-sm">Open Source Contribution</h3>
+                            <span class="bg-gray-100 text-gray-600 text-[10px] font-bold px-2 py-0.5 rounded">Open
+                                Source</span>
+                        </div>
+                        <svg xmlns="http://www.w3.org/2000/svg"
+                            class="h-4 w-4 text-slate-300 group-hover:text-indigo-500 transition-colors" fill="none"
+                            viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                        </svg>
+                    </div>
+                    <p class="text-xs text-slate-500 mb-3">Work on GSoC prep together</p>
+                    <div class="text-xs text-indigo-600 font-medium">5 peers interested</div>
+                </div>
+
+                <!-- Suggestion 3 -->
+                <div
+                    class="bg-white rounded-xl p-5 border border-slate-100 shadow-sm hover:shadow-md transition-shadow group cursor-pointer">
+                    <div class="flex justify-between items-start mb-2">
+                        <div class="flex items-center gap-2">
+                            <h3 class="font-bold text-slate-800 text-sm">System Design Discussion</h3>
+                            <span class="bg-gray-100 text-gray-600 text-[10px] font-bold px-2 py-0.5 rounded">System
+                                Design</span>
+                        </div>
+                        <svg xmlns="http://www.w3.org/2000/svg"
+                            class="h-4 w-4 text-slate-300 group-hover:text-indigo-500 transition-colors" fill="none"
+                            viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                        </svg>
+                    </div>
+                    <p class="text-xs text-slate-500 mb-3">Discuss HLD for common patterns</p>
+                    <div class="text-xs text-indigo-600 font-medium">4 peers interested</div>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- Notification Modal -->
+    <div id="free-slot-notification"
+        class="fixed bottom-4 right-4 max-w-sm w-full bg-white rounded-xl shadow-2xl border border-indigo-100 p-4 transform translate-y-full opacity-0 transition-all duration-500 z-50 hidden">
+        <div class="flex items-start gap-4">
+            <div class="bg-indigo-100 text-indigo-600 p-2 rounded-lg">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
+                    stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
+                </svg>
+            </div>
+            <div class="flex-1">
+                <h3 class="font-bold text-slate-800 text-sm mb-1">Upcoming Free Slot!</h3>
+                <p class="text-xs text-slate-600 mb-3">Your free slot starts in <span id="notification-time-left"
+                        class="font-bold text-indigo-600">10 mins</span>. Want to see some suggested activities or
+                    peers?</p>
+                <div class="flex gap-2">
+                    <button id="notification-yes-btn"
+                        class="flex-1 bg-indigo-600 text-white text-xs font-bold py-2 rounded-lg hover:bg-indigo-700 transition-colors">
+                        Yes, show me!
+                    </button>
+                    <button id="notification-no-btn"
+                        class="flex-1 bg-slate-100 text-slate-600 text-xs font-bold py-2 rounded-lg hover:bg-slate-200 transition-colors">
+                        No, thanks
+                    </button>
+                </div>
+            </div>
+            <button id="notification-close-btn" class="text-slate-400 hover:text-slate-600">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24"
+                    stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+            </button>
+        </div>
+    </div>
+
+</body>
+
+</html>
